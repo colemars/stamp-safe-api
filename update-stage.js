@@ -1,7 +1,7 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export default async function main(event) {
   const data = JSON.parse(event.body);
   const params = {
     TableName: "stages",
@@ -13,7 +13,8 @@ export async function main(event, context) {
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
-    UpdateExpression: "SET serialNumber = :serialNumber, make = :make, model = :model, yearManufactored = :yearManufactored, conditionOfItem = :conditionOfItem, image = :image, previousOwners = :previousOwners, price = :price",
+    UpdateExpression:
+      "SET serialNumber = :serialNumber, make = :make, model = :model, yearManufactored = :yearManufactored, conditionOfItem = :conditionOfItem, image = :image, previousOwners = :previousOwners, price = :price",
     ExpressionAttributeValues: {
       ":serialNumber": data.serialNumber || null,
       ":make": data.make || null,
@@ -31,10 +32,9 @@ export async function main(event, context) {
   };
 
   try {
-    const result = await dynamoDbLib.call("update", params);
+    await dynamoDbLib.call("update", params);
     return success({ status: true });
   } catch (e) {
-    console.log(e)
     return failure({ status: false });
   }
 }

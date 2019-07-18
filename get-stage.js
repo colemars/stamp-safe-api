@@ -1,7 +1,7 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export default async function main(event) {
   const params = {
     TableName: "stages",
     // 'Key' defines the partition key and sort key of the item to be retrieved
@@ -9,7 +9,7 @@ export async function main(event, context) {
     // - 'noteId': path parameter
     Key: {
       stageId: event.pathParameters.id
-    },
+    }
   };
 
   try {
@@ -17,11 +17,10 @@ export async function main(event, context) {
     if (result.Item) {
       // Return the retrieved item
       return success(result.Item);
-    } else {
-      return failure({ status: false, error: "Item not found." });
     }
+    return failure({ status: false, error: "Item not found." });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return failure({ status: false });
   }
 }
