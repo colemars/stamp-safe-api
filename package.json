@@ -49,8 +49,6 @@
     "babel-runtime": "^6.26.0",
     "jsdom": "^15.1.1",
     "node-fetch": "^2.6.0",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
     "source-map-support": "^0.5.12",
     "uuid": "^3.3.2"
   }
