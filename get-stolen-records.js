@@ -2,7 +2,7 @@
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const { getStolenRecord } = require('./helpers/hotgunz');
+const { getStolenRecord } = require('./helpers/hotgunz').default;
 
 export function main(event, callback) {
   getStolenRecord(event.pathParameters.id)
