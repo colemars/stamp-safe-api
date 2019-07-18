@@ -9,7 +9,6 @@ export default function main(event, callback) {
       const dom = new JSDOM(body);
       const { document } = dom.window;
       const result = document.querySelector("#flash").textContent;
-      console.log(result);
       return result;
     })
     .catch(error => {

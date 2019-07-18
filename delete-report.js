@@ -1,7 +1,7 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
-export async function main(event, context) {
+export default async function main(event) {
   const params = {
     TableName: "reports",
     Key: {
@@ -10,7 +10,7 @@ export async function main(event, context) {
   };
 
   try {
-    const result = await dynamoDbLib.call("delete", params);
+    await dynamoDbLib.call("delete", params);
     return success({ status: true });
   } catch (e) {
     return failure({ status: false });
