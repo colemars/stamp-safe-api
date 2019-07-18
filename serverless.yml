@@ -46,8 +46,6 @@ functions:
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
-  get-stolen-records:
-    handler: get-stolen-records.main
   create-stage:
     handler: create-stage.main
     events:
@@ -86,11 +84,14 @@ functions:
             method: get
             cors: true
             authorizer: aws_iam
-  get-hotgunz-record:
-      # Defines an HTTP API endpoint that calls the main function in get.js
-      # - path: url path is /notes/{id}
-      # - method: GET request
-      handler: get-hotgunz-record.main
+  get-stolen-records:
+    handler: get-stolen-records.main
+    events:
+      - http:
+          path: stolen
+          method: post
+          cors: true
+          authorizer: aws_iam
   update-stage:
       # Defines an HTTP API endpoint that calls the main function in update.js
       # - path: url path is /notes/{id}

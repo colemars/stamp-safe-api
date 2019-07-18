@@ -4,8 +4,8 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const { getStolenRecord } = require('./helpers/hotgunz');
 
-export function main(event, context, callback) {
-  getStolenRecord()
+export function main(event, callback) {
+  getStolenRecord(event.pathParameters.id)
     .then((body) => {
       const dom = new JSDOM(body);
       const document = dom.window.document;
