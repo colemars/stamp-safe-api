@@ -47,7 +47,7 @@ functions:
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
   create-stage:
-    handler: create-stage.main
+    handler: create-stage.default
     events:
       - http:
           path: stage
@@ -55,7 +55,7 @@ functions:
           cors: true
           authorizer: aws_iam
   create-report:
-    handler: create-report.main
+    handler: create-report.default
     events:
       - http:
           path: report
@@ -66,7 +66,7 @@ functions:
       # Defines an HTTP API endpoint that calls the main function in get.js
       # - path: url path is /notes/{id}
       # - method: GET request
-      handler: get-stage.main
+      handler: get-stage.default
       events:
         - http:
             path: stage/{id}
@@ -77,7 +77,7 @@ functions:
       # Defines an HTTP API endpoint that calls the main function in get.js
       # - path: url path is /notes/{id}
       # - method: GET request
-      handler: get-report.main
+      handler: get-report.default
       events:
         - http:
             path: report/{id}
@@ -85,7 +85,7 @@ functions:
             cors: true
             authorizer: aws_iam
   get-stolen-records:
-    handler: get-stolen-records.main
+    handler: get-stolen-records.default
     events:
       - http:
           path: stolen
@@ -96,7 +96,7 @@ functions:
       # Defines an HTTP API endpoint that calls the main function in update.js
       # - path: url path is /notes/{id}
       # - method: PUT request
-      handler: update-stage.main
+      handler: update-stage.default
       events:
         - http:
             path: stage/{id}
@@ -107,7 +107,7 @@ functions:
       # Defines an HTTP API endpoint that calls the main function in update.js
       # - path: url path is /notes/{id}
       # - method: PUT request
-      handler: update-report.main
+      handler: update-report.default
       events:
         - http:
             path: report/{id}
@@ -118,7 +118,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
     # - method: DELETE request
-    handler: delete-stage.main
+    handler: delete-stage.default
     events:
       - http:
           path: stage/{id}
@@ -129,7 +129,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
     # - method: DELETE request
-    handler: delete-report.main
+    handler: delete-report.default
     events:
       - http:
           path: report/{id}
