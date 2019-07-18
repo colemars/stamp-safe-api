@@ -15,6 +15,4 @@ const getStolenRecord = serialNumber =>
       .then(body => resolve(body))
       .catch(error => reject(error));
   });
-export default {
-  getStolenRecord
-};
+export default getStolenRecord;

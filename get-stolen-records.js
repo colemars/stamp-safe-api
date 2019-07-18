@@ -1,9 +1,7 @@
-import jsdom from "jsdom";
-
+import { JSDOM } from "jsdom";
 import getStolenRecord from "./helpers/hotgunz";
 
 export default function main(event, callback) {
-  const { JSDOM } = jsdom;
   getStolenRecord(event.pathParameters.id)
     .then(body => {
       const dom = new JSDOM(body);
