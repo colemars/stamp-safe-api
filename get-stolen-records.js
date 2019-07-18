@@ -1,9 +1,9 @@
-const jsdom = require("jsdom");
+import jsdom from "jsdom";
 
-const { JSDOM } = jsdom;
-const { getStolenRecord } = require("./helpers/hotgunz").default;
+import getStolenRecord from "./helpers/hotgunz";
 
 export default function main(event, callback) {
+  const { JSDOM } = jsdom;
   getStolenRecord(event.pathParameters.id)
     .then(body => {
       const dom = new JSDOM(body);
