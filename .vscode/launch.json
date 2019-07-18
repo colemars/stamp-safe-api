@@ -1,14 +1,19 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/libs/testResponse.js" 
-    }
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "Debug",
+          "autoAttachChildProcesses": true,
+          "program": "${workspaceFolder}/helpers/hotgunz.js",
+          "console": "internalConsole",
+          "runtimeArgs": ["--nolazy", "--require", "@babel/register"],
+          "env": {
+              "BABEL_ENV": "debug",
+              "NODE_ENV": "debug"
+          },
+          "skipFiles": ["node_modules/**/*.js", "<node_internals>/**/*.js"]
+      }
   ]
 }
