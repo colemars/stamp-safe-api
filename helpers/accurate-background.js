@@ -10,31 +10,55 @@ const createCustomer = () =>
       ssn: "531-90-1234",
       email: "bert@physics.org"
     });
-    const url = "https://api.accuratebackground.com/v3/candidate/"
-    const username = "b97083ec-d9c1-4d5f-b88c-06c43b4eed0f";
-    const password = "7f90b0d1-33ca-4bba-9418-e1e4bcd3ab13";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString(
-        "base64"
-      )}`
-    };
-    const myHeaders = new fetch.Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
+    const uri = "https://api.accuratebackground.com/v3/candidate/";
+    const clientId = "b97083ec-d9c1-4d5f-b88c-06c43b4eed0f";
+    const clientSecret = "7f90b0d1-33ca-4bba-9418-e1e4bcd3ab13";
+    const headers = new fetch.Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append(
       "Authorization",
-      `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`
+      `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`
     );
     const options = {
       method: "POST",
       headers,
       body: dataString
     };
-    fetch(url, options)
+    fetch(uri, options)
       .then(res => res.json()) // expecting a json response
       .then(json => console.log(JSON.stringify(json)))
       .then(body => resolve(body))
       .catch(error => reject(error));
   });
 
-createCustomer();
+const placeOrder = () => {
+  const uri = "https://api.accuratebackground.com/v3/order/";
+
+  const clientId = "b97083ec-d9c1-4d5f-b88c-06c43b4eed0f";
+  const clientSecret = "7f90b0d1-33ca-4bba-9418-e1e4bcd3ab13";
+
+  const headers = new fetch.Headers();
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+  headers.append(
+    "Authorization",
+    `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`
+  );
+
+  const param = new URLSearchParams();
+  param.append("candidateId", "5d3283587303d8316436bd72");
+  param.append("packageType", "PKG_BASIC");
+  param.append("workflow", "EXPRESS");
+  param.append("jobLocation.country", "US");
+  param.append("jobLocation.region", "CA");
+  param.append("jobLocation.city", "Hollywood");
+
+  const options = {
+    method: "POST",
+    headers,
+    body: param
+  };
+
+  fetch(uri, options)
+    .then(res => res.json())
+    .then(json => console.log(JSON.stringify(json)));
+};
