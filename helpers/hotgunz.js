@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import { URLSearchParams } from "url";
 
 const getStolenRecord = serialNumber =>
   new Promise((resolve, reject) => {
