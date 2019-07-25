@@ -62,6 +62,8 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+  create-candidate:
+    handler: create-candidate.default
   get-stage:
       # Defines an HTTP API endpoint that calls the main function in get.js
       # - path: url path is /notes/{id}
