@@ -8,20 +8,15 @@ export default async function main(event) {
 
   const params = {
     TableName: "stages",
-    // 'Item' contains the attributes of the item to be created
-    // - 'reportId': a unique uuid
-    // - 'content': parsed from request body
-    // - 'attachment': parsed from request body
-    // - 'createdAt': current Unix timestamp
     Item: {
       stageId: uuid.v4(),
-      accessToken: uuid.v4(),
+      accessToken: data.accessToken,
       serialNumber: data.serialNumber,
       make: data.make,
       model: data.model,
       yearManufactored: data.yearManufactored,
       conditionOfItem: data.conditionOfItem,
-      image: data.image,
+      imageKeys: data.imageKeys,
       previousOwners: data.previousOwners,
       price: data.price,
       backgroundCheckStatus: null,
