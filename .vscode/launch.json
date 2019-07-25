@@ -6,7 +6,8 @@
           "request": "launch",
           "name": "Debug",
           "autoAttachChildProcesses": true,
-          "program": "${workspaceFolder}/helpers/hotgunz.js",
+        //   "program": "${workspaceFolder}/create-candidate.js",
+          "program": "${workspaceFolder}/helpers/accurate-background.js",
           "console": "internalConsole",
           "runtimeArgs": ["--nolazy", "--require", "@babel/register"],
           "env": {
