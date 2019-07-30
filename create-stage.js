@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
@@ -9,8 +8,7 @@ export default async function main(event) {
   const params = {
     TableName: "stages",
     Item: {
-      stageId: uuid.v4(),
-      accessToken: data.accessToken,
+      stageId: data.accessToken,
       serialNumber: data.serialNumber,
       make: data.make,
       model: data.model,
