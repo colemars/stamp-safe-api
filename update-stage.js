@@ -2,7 +2,6 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export default async function main(event) {
-  const data = JSON.parse(event.body);
   const params = {
     TableName: "stages",
     // 'Key' defines the partition key and sort key of the item to be updated
