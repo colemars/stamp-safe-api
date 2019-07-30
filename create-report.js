@@ -47,7 +47,7 @@ export default async function main(event) {
       };
       await dynamoDbLib.call("put", reportsParams);
       await dynamoDbLib.call("update", updateStageParams);
-      return success(reportsParams.Item);
+      return success(reportsParams.Item.reportId);
     }
     return failure({ status: false, error: "Item not found." });
   } catch (e) {
