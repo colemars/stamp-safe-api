@@ -13,17 +13,9 @@ export default async function main(event) {
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
-    UpdateExpression:
-      "SET serialNumber = :serialNumber, make = :make, model = :model, yearManufactored = :yearManufactored, conditionOfItem = :conditionOfItem, image = :image, previousOwners = :previousOwners, price = :price",
+    UpdateExpression: "SET linkedReportIds = :linkedReportIds",
     ExpressionAttributeValues: {
-      ":serialNumber": data.serialNumber || null,
-      ":make": data.make || null,
-      ":model": data.model || null,
-      ":yearManufactored": data.yearManufactored || null,
-      ":conditionOfItem": data.conditionOfItem || null,
-      ":image": data.image || null,
-      ":previousOwners": data.previousOwners || null,
-      ":price": data.price || null
+      ":linkedReportIds": event.pathParameters.id || null
     },
     // 'ReturnValues' specifies if and how to return the item's attributes,
     // where ALL_NEW returns all attributes of the item after the update; you
