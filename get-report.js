@@ -1,34 +1,34 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
+import { buyerReport, sellerReport } from "./constants/definitions";
 
 export default async function main(event) {
   const buyerReportParams = {
-    TableName: "reports",
+    TableName: "stampsafe-reports",
     Key: {
-      reportId: event.pathParameters.id
+      typeId: buyerReport,
+      accessKey: event.pathParameters.id
     }
   };
   const sellerReportParams = {
-    TableName: "stages",
+    TableName: "stampsafe-reports",
     Key: {
-      stageId: event.pathParameters.id
+      typeId: sellerReport,
+      accessKey: event.pathParameters.id
     }
   };
 
   try {
-    const buyerReport = await dynamoDbLib.call("get", buyerReportParams);
-    if (buyerReport.Item) {
-      // Return the retrieved item
-      return success(buyerReport.Item);
+    const buyerResults = await dynamoDbLib.call("get", buyerReportParams);
+    if (buyerResults.Item) {
+      return success(buyerResults.Item);
     }
-    const sellerReport = await dynamoDbLib.call("get", sellerReportParams);
-    if (sellerReport.Item) {
-      // Return the retrieved item
-      return success(sellerReport.Item);
+    const sellerResults = await dynamoDbLib.call("get", sellerReportParams);
+    if (sellerResults.Item) {
+      return success(sellerResults.Item);
     }
     return failure({ status: false, error: "Item not found." });
   } catch (e) {
-    console.log(e)
     return failure({ status: false });
   }
 }
