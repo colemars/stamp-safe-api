@@ -18,7 +18,8 @@ export default async function main(event) {
     }
   };
 
-  const deleteLinkedReport = async reportKey => {
+  const getLinkedReport = async reportKey => {
+    console.log("begin func");
     const paramsQuery = {
       TableName: process.env.tableName,
       IndexName: "typeId-linkKey-index",
@@ -30,7 +31,9 @@ export default async function main(event) {
     };
     try {
       const results = await dynamoDbLib.call("query", paramsQuery);
+      console.log(results);
       const { reportStatus } = results.Items[0];
+      console.log(reportStatus);
       return reportStatus;
     } catch (e) {
       return failure({ status: false });
@@ -39,20 +42,27 @@ export default async function main(event) {
 
   try {
     const buyerResults = await dynamoDbLib.call("get", buyerReportParams);
+
     if (buyerResults.Item) {
       return success(buyerResults.Item);
     }
+
     const sellerResults = await dynamoDbLib.call("get", sellerReportParams);
+
     if (sellerResults.Item) {
+      console.log("seller report", sellerResults.Item);
       const reportStatuses = [];
-      const results = await dynamoDbLib.call("get", buyerReportParams);
+      console.log("linked reports", sellerResults.Item.linkedReports);
       // eslint-disable-next-line no-restricted-syntax
-      for (const linkedReport of results.Item.linkedReports) {
+      for (const linkedReport of sellerResults.Item.linkedReports) {
+        console.log("begin loop", linkedReport);
         // eslint-disable-next-line no-await-in-loop
-        const reportStatus = await deleteLinkedReport(linkedReport);
+        const reportStatus = await getLinkedReport(linkedReport);
         reportStatuses.push(reportStatus);
+        console.log("end loop", reportStatus);
+        console.log("new array", reportStatuses);
       }
-      return success(sellerResults.Item);
+      return success({ item: sellerResults.Item, statuses: reportStatuses });
     }
     return failure({ status: false, error: "Item not found." });
   } catch (e) {
