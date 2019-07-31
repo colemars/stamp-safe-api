@@ -12,10 +12,13 @@ export default async function main(event) {
   const returnValues =
     reportType === sellerReport
       ? { accessKey: newAccessKey, linkKey: newLinkKey }
-      : { newAccessToken };
+      : {
+          newAccessToken,
+          linkKey: newLinkKey,
+          reportStatus: "Not Started"
+        };
   const conditionalAttributes = {};
 
-  if (reportType === sellerReport) conditionalAttributes.linkedReports = [];
   if (reportType === buyerReport) {
     conditionalAttributes.stolenPropertyCheckStatus = "Not Started";
     conditionalAttributes.priceAlertStatus = "Not Started";
@@ -43,7 +46,7 @@ export default async function main(event) {
       stolenPropertyCheckStatus:
         conditionalAttributes.stolenPropertyCheckStatus,
       priceAlertStatus: conditionalAttributes.priceAlertStatus,
-      linkedReports: conditionalAttributes.linkedReports,
+      linkedReports: data.linkedReports,
       reportStatus: conditionalAttributes.reportStatus,
       createdAt: Date.now()
     }
