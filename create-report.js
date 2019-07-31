@@ -1,13 +1,12 @@
 import uuid from "uuid";
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
+import { buyerReport, sellerReport } from "./constants/definitions";
 
 export default async function main(event) {
   const data = JSON.parse(event.body);
   const newLinkKey = uuid.v4();
   const newAccessToken = uuid.v4();
-  const sellerReport = "100";
-  const buyerReport = "101";
   const reportType = data.typeId === sellerReport ? sellerReport : buyerReport;
   const newAccessKey = reportType === sellerReport ? data.accessKey : uuid.v4();
   const returnValues =
