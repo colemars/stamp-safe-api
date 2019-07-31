@@ -18,7 +18,7 @@ export default async function main(event) {
     if (report.Items) {
       const { accessKey } = report.Items[0];
       const updateParams = {
-        TableName: "stampsafe-reports",
+        TableName: process.env.tableName,
         Key: {
           typeId: buyerReport,
           accessKey

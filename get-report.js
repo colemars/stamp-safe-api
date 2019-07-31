@@ -4,14 +4,14 @@ import { buyerReport, sellerReport } from "./constants/definitions";
 
 export default async function main(event) {
   const buyerReportParams = {
-    TableName: "stampsafe-reports",
+    TableName: process.env.tableName,
     Key: {
       typeId: buyerReport,
       accessKey: event.pathParameters.id
     }
   };
   const sellerReportParams = {
-    TableName: "stampsafe-reports",
+    TableName: process.env.tableName,
     Key: {
       typeId: sellerReport,
       accessKey: event.pathParameters.id

@@ -8,7 +8,7 @@ export default async function main(event) {
   const data = JSON.parse(event.body);
   const reportType = data.typeId === sellerReport ? sellerReport : buyerReport;
   const paramsOriginal = {
-    TableName: "stampsafe-reports",
+    TableName: process.env.tableName,
     Key: {
       typeId: data.typeId,
       accessKey: event.pathParameters.id
@@ -17,7 +17,7 @@ export default async function main(event) {
 
   const deleteLinkedReport = async reportKey => {
     const paramsQuery = {
-      TableName: "stampsafe-reports",
+      TableName: process.env.tableName,
       IndexName: "typeId-linkKey-index",
       KeyConditionExpression: "typeId = :id and linkKey = :key",
       ExpressionAttributeValues: {
@@ -29,7 +29,7 @@ export default async function main(event) {
       const results = await dynamoDbLib.call("query", paramsQuery);
       const key = results.Items[0].accessKey;
       const paramsDelete = {
-        TableName: "stampsafe-reports",
+        TableName: process.env.tableName,
         Key: {
           typeId: buyerReport,
           accessKey: key

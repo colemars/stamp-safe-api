@@ -24,7 +24,7 @@ export default async function main(event) {
   }
 
   const params = {
-    TableName: "stampsafe-reports",
+    TableName: process.env.tableName,
     Item: {
       typeId: reportType,
       accessKey: newAccessKey,
@@ -53,7 +53,7 @@ export default async function main(event) {
     await dynamoDbLib.call("put", params);
     if (reportType === buyerReport) {
       const updateSellerReportParams = {
-        TableName: "stampsafe-reports",
+        TableName: process.env.tableName,
         Key: {
           typeId: sellerReport,
           accessKey: data.accessKey

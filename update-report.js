@@ -4,9 +4,10 @@ import { success, failure } from "./libs/response-lib";
 export default async function main(event) {
   const data = JSON.parse(event.body);
   const params = {
-    TableName: "reports",
+    TableName: process.env.tableName,
     Key: {
-      reportId: event.pathParameters.id
+      typeId: data.typeId,
+      accessKey: data.accessKey
     },
     UpdateExpression:
       "SET backgroundCheckStatus = :backgroundCheckStatus, stolenPropertyCheckStatus = :stolenPropertyCheckStatus, priceAlertStatus = :priceAlertStatus",
