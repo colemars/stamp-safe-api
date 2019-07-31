@@ -1,0 +1,37 @@
+Resources:
+  ReportsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableName}
+      AttributeDefinitions:
+        - AttributeName: typeId
+          AttributeType: S
+        - AttributeName: accessKey
+          AttributeType: S
+      KeySchema:
+        - AttributeName: typeId
+          KeyType: HASH
+        - AttributeName: accessKey
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST
+      LocalSecondaryIndexes:
+        - IndexName: typeId-accessToken-index
+          KeySchema:
+          - AttributeName: typeId
+            KeyType: HASH
+          - AttributeName: accessToken
+            KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: typeId-linkKey-index
+          KeySchema:
+          - AttributeName: typeId
+            KeyType: HASH
+          - AttributeName: linkKey
+            KeyType: HASH
+          Projection:
+            NonKeyAttributes:
+            - reportStatus
+            - accessKey
+            ProjectionType: INCLUDE
