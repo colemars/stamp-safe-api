@@ -17,9 +17,10 @@ export default async function main(event) {
 
   if (reportType === sellerReport) conditionalAttributes.linkedReports = [];
   if (reportType === buyerReport) {
-    conditionalAttributes.stolenPropertyCheckStatus = false;
-    conditionalAttributes.priceAlertStatus = false;
+    conditionalAttributes.stolenPropertyCheckStatus = "Not Started";
+    conditionalAttributes.priceAlertStatus = "Not Started";
     conditionalAttributes.accessToken = newAccessToken;
+    conditionalAttributes.reportStatus = "Not Started";
   }
 
   const params = {
@@ -36,13 +37,14 @@ export default async function main(event) {
       imageKeys: data.imageKeys,
       previousOwners: data.previousOwners,
       price: data.price,
-      backgroundCheckStatus: false,
+      backgroundCheckStatus: "Not Started",
       linkedReport: data.linkedReport,
       accessToken: conditionalAttributes.accessToken,
       stolenPropertyCheckStatus:
         conditionalAttributes.stolenPropertyCheckStatus,
       priceAlertStatus: conditionalAttributes.priceAlertStatus,
       linkedReports: conditionalAttributes.linkedReports,
+      reportStatus: conditionalAttributes.reportStatus,
       createdAt: Date.now()
     }
   };
