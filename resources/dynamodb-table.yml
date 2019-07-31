@@ -8,6 +8,10 @@ Resources:
           AttributeType: S
         - AttributeName: accessKey
           AttributeType: S
+        - AttributeName: accessToken
+          AttributeType: S
+        - AttributeName: linkKey
+          AttributeType: S          
       KeySchema:
         - AttributeName: typeId
           KeyType: HASH
@@ -21,7 +25,7 @@ Resources:
           - AttributeName: typeId
             KeyType: HASH
           - AttributeName: accessToken
-            KeyType: HASH
+            KeyType: RANGE
           Projection:
             ProjectionType: ALL
         - IndexName: typeId-linkKey-index
@@ -29,7 +33,7 @@ Resources:
           - AttributeName: typeId
             KeyType: HASH
           - AttributeName: linkKey
-            KeyType: HASH
+            KeyType: RANGE
           Projection:
             NonKeyAttributes:
             - reportStatus
