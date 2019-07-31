@@ -37,7 +37,6 @@ provider:
     tableName: ${self:custom.tableName}
     accurateSecretKey: ${self:custom.environment.accurateSecretKey}
 
-
   iamRoleStatements:
     - Effect: Allow
       Action:
