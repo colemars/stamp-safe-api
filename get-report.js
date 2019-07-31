@@ -19,7 +19,6 @@ export default async function main(event) {
   };
 
   const getLinkedReport = async reportKey => {
-    console.log("begin func");
     const paramsQuery = {
       TableName: process.env.tableName,
       IndexName: "typeId-linkKey-index",
@@ -31,10 +30,8 @@ export default async function main(event) {
     };
     try {
       const results = await dynamoDbLib.call("query", paramsQuery);
-      console.log(results);
-      const { reportStatus } = results.Items[0];
-      console.log(reportStatus);
-      return reportStatus;
+      const { reportStatus, linkKey } = results.Items[0];
+      return { status: reportStatus, key: linkKey };
     } catch (e) {
       return failure({ status: false });
     }
@@ -50,17 +47,12 @@ export default async function main(event) {
     const sellerResults = await dynamoDbLib.call("get", sellerReportParams);
 
     if (sellerResults.Item) {
-      console.log("seller report", sellerResults.Item);
       const reportStatuses = [];
-      console.log("linked reports", sellerResults.Item.linkedReports);
       // eslint-disable-next-line no-restricted-syntax
       for (const linkedReport of sellerResults.Item.linkedReports) {
-        console.log("begin loop", linkedReport);
         // eslint-disable-next-line no-await-in-loop
         const reportStatus = await getLinkedReport(linkedReport);
         reportStatuses.push(reportStatus);
-        console.log("end loop", reportStatus);
-        console.log("new array", reportStatuses);
       }
       return success({ item: sellerResults.Item, statuses: reportStatuses });
     }
