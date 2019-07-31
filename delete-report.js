@@ -53,6 +53,7 @@ export default async function main(event) {
     await dynamoDbLib.call("delete", paramsOriginal);
     return success({ status: true });
   } catch (e) {
+    console.log(e);
     return failure({ status: false });
   }
 }
