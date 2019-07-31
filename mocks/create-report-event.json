@@ -1,3 +1,3 @@
 {
-  "body": "{\"serialNumber\":\"1234\",\"make\":\"sig\",\"model\":\"m11a1\",\"yearManufactored\":\"2016\",\"conditionOfItem\":\"barely used\",\"image\":\"serial.png\",\"previousOwners\":\"0\",\"price\":\"$877\"}"
+  "body": "{\"serialNumber\":\"1234\",\"accessKey\":\"1234-123124234-32sdasa-123\",\"typeId\":\"100\",\"make\":\"sig\",\"model\":\"m11a1\",\"yearManufactored\":\"2016\",\"conditionOfItem\":\"barely used\",\"imageKeys\":\"[serial.png]\",\"previousOwners\":\"0\",\"price\":\"$877\"}"
 }
