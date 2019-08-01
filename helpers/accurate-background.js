@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const createCandidate = candidateInformation =>
+export const createCandidate = candidateInformation =>
   new Promise((resolve, reject) => {
     const dataString = JSON.stringify({
       firstName: candidateInformation.firstName,
@@ -31,7 +31,7 @@ const createCandidate = candidateInformation =>
       .catch(error => reject(error));
   });
 
-const placeOrder = candidateInformation =>
+export const placeOrder = candidateInformation =>
   new Promise((resolve, reject) => {
     const uri = "https://api.accuratebackground.com/v3/order/";
     const clientId = "b97083ec-d9c1-4d5f-b88c-06c43b4eed0f";
