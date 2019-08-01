@@ -74,14 +74,6 @@ functions:
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
-  create-stage:
-    handler: create-stage.default
-    events:
-      - http:
-          path: stage
-          method: post
-          cors: true
-          authorizer: aws_iam
   create-report:
     handler: create-report.default
     events:
@@ -101,19 +93,22 @@ functions:
             method: get
             cors: true
             authorizer: aws_iam
-  # create-candidate:
-  #   handler: create-candidate.default
-  get-stage:
-      # Defines an HTTP API endpoint that calls the main function in get.js
-      # - path: url path is /notes/{id}
-      # - method: GET request
-      handler: get-stage.default
-      events:
-        - http:
-            path: stage/{id}
-            method: get
-            cors: true
-            authorizer: aws_iam
+  criminal-record-check:
+    handler: criminal-record-check.default
+    events:
+      - http:
+          path: backgroundcheck
+          method: post
+          cors: true
+          authorizer: aws_iam
+  get-stolen-records:
+    handler: get-stolen-records.default
+    events:
+      - http:
+          path: stolen
+          method: post
+          cors: true
+          authorizer: aws_iam
   get-report:
       # Defines an HTTP API endpoint that calls the main function in get.js
       # - path: url path is /notes/{id}
@@ -123,25 +118,6 @@ functions:
         - http:
             path: report/{id}
             method: get
-            cors: true
-            authorizer: aws_iam
-  get-stolen-records:
-    handler: get-stolen-records.default
-    events:
-      - http:
-          path: stolen
-          method: post
-          cors: true
-          authorizer: aws_iam
-  update-stage:
-      # Defines an HTTP API endpoint that calls the main function in update.js
-      # - path: url path is /notes/{id}
-      # - method: PUT request
-      handler: update-stage.default
-      events:
-        - http:
-            path: stage/{id}
-            method: put
             cors: true
             authorizer: aws_iam
   update-report:
@@ -155,17 +131,6 @@ functions:
             method: put
             cors: true
             authorizer: aws_iam
-  delete-stage:
-    # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /notes/{id}
-    # - method: DELETE request
-    handler: delete-stage.default
-    events:
-      - http:
-          path: stage/{id}
-          method: delete
-          cors: true
-          authorizer: aws_iam
   delete-report:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
