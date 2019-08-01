@@ -1,5 +1,3 @@
 {
-  "pathParameters": {
-    "serialNumber": "MFG1243"
-  }
+  "body": "{\"serialNumber\":\"MFG124\"}"
 }
