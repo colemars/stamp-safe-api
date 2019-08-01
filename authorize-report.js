@@ -34,10 +34,8 @@ export default async function main(event) {
       await dynamoDbLib.call("update", updateParams);
       return success(report.Items[0]);
     }
-    console.log("not found")
     return failure({ status: false, error: "Item not found." });
   } catch (e) {
-    console.log(e)
     return failure({ status: false });
   }
 }
