@@ -1,21 +1,14 @@
 import { JSDOM } from "jsdom";
 import getStolenRecord from "./helpers/hotgunz";
-import { success, failure } from "./libs/response-lib";
+import { success } from "./libs/response-lib";
 
-export default function main(event) {
+export default async function main(event) {
   const data = JSON.parse(event.body);
-  getStolenRecord(data.serialNumber)
-    .then(body => {
-      const dom = new JSDOM(body);
-      const { document } = dom.window;
-      const result = document.querySelector("#flash").textContent;
-      console.log(result);
-      if (result.toLowerCase() === "warning: stolen firearm")
-        return success("stolen");
-      return success("not found");
-    })
-    .catch(e => {
-      console.log(e)
-      return failure({ e });
-    });
+  const result = await getStolenRecord(data.serialNumber);
+  const dom = new JSDOM(result);
+  const { document } = dom.window;
+  const stolen = document.querySelector("#flash").textContent;
+  if (stolen.toLowerCase() === "warning: stolen firearm")
+    return success({ result: "Stolen" });
+  return success({ result: "Not found" });
 }
