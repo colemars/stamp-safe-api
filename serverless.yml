@@ -63,7 +63,7 @@ provider:
             - ':'
             - Ref: AWS::AccountId
             - ':table/'
-            - ${self:custom.stage}-stampsafe-reports
+            - ${self:custom.tableName}/
             - 'index/*'
 
         # - arn:aws:dynamodb:us-west-2:AWS::AccountId:table/dev-stampsafe-reports/index/*
