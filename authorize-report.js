@@ -24,7 +24,7 @@ export default async function main(event) {
           accessKey
         },
         UpdateExpression:
-          "SET accessToken = :accessToken, SET reportStatus = :reportStatus",
+          "SET accessToken = :accessToken, reportStatus = :reportStatus",
         ExpressionAttributeValues: {
           ":accessToken": "expired",
           ":reportStatus": "In Progress"
