@@ -14,6 +14,7 @@ export default function main(event) {
       return success("not found");
     })
     .catch(e => {
+      console.log(e)
       return failure({ e });
     });
 }
