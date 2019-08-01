@@ -4,6 +4,8 @@ import { createCandidate, placeOrder } from "./helpers/accurate-background";
 export default async function main(event) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
+  console.log(data);
+
   const candidateInformation = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -19,6 +21,9 @@ export default async function main(event) {
 
   try {
     const candidate = await createCandidate(candidateInformation);
+
+    console.log("test", candidate.id);
+
     const orderInformation = {
       id: candidate.id,
       packageType: "PKG_EMPTY",
@@ -32,8 +37,10 @@ export default async function main(event) {
     };
 
     const order = await placeOrder(orderInformation);
+    console.log(order);
     return success({ id: order.id, status: order.status });
   } catch (e) {
+    console.log(e);
     return failure({ status: false });
   }
 }
