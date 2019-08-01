@@ -19,6 +19,7 @@ export default async function main(event) {
 
   try {
     const candidate = await createCandidate(candidateInformation);
+    console.log("finish candidate", candidate)
     const orderInformation = {
       id: candidate.id,
       packageType: "PKG_EMPTY",
@@ -32,8 +33,10 @@ export default async function main(event) {
     };
 
     const order = await placeOrder(orderInformation);
-    return success({ id: order.id, status: order.status });
+    console.log("finish order", order)
+    return success({ id: "Hello", status: "GoodBye" });
   } catch (e) {
+    console.log(e)
     return failure({ status: false });
   }
 }
