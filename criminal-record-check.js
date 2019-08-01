@@ -11,7 +11,11 @@ export default async function main(event) {
     phone: data.phone,
     dateOfBirth: data.dateOfBirth,
     ssn: data.ssn,
-    email: data.email
+    email: data.email,
+    city: data.city,
+    country: data.country,
+    postalCode: data.postalCode,
+    address: data.address
   };
 
   try {
