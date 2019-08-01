@@ -55,7 +55,7 @@ provider:
       Action:
         - dynamodb:Query
       Resource: 
-        - !GetAtt ReportsTable.Properties.LocalSecondaryIndexes.IndexName[0]
+        - arn:aws:dynamodb:us-west-2:578713821554:table/ReportsTable/index/*
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
