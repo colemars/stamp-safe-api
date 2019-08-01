@@ -22,8 +22,8 @@ export default async function main(event) {
   };
 
   try {
-    await dynamoDbLib.call("update", params);
-    return success({ status: true });
+    const result = await dynamoDbLib.call("update", params);
+    return success(result);
   } catch (e) {
     return failure({ status: false });
   }
