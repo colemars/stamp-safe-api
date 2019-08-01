@@ -55,6 +55,7 @@ provider:
       Action:
         - dynamodb:Query
       Resource: 
+       # this is building the following format: arn:aws:dynamodb:us-west-2:AWS::AccountId:table/dev-stampsafe-reports/index/*
         Fn::Join:
           - ''
           -
@@ -65,9 +66,7 @@ provider:
             - ':table/'
             - ${self:custom.tableName}/
             - 'index/*'
-
-        # - arn:aws:dynamodb:us-west-2:AWS::AccountId:table/dev-stampsafe-reports/index/*
-
+            
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
   # - path: url path is /notes
