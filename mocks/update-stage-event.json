@@ -1,6 +1,0 @@
-{
-  "body": "{\"serialNumber\":\"1234\",\"make\":\"Sig Sauer\",\"model\":\"M11-A1\",\"yearManufactored\":\"2016\",\"conditionOfItem\":\"barely used\",\"image\":\"serial.png\",\"previousOwners\":\"0\",\"price\":\"$800\"}",
-  "pathParameters": {
-    "id": "0c05b55b-f3ee-466f-9732-789ddbd8e9e3"
-  }
-}
