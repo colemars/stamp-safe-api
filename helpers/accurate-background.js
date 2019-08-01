@@ -8,7 +8,11 @@ export const createCandidate = candidateInformation =>
       phone: candidateInformation.phone,
       dateOfBirth: candidateInformation.dateOfBirth,
       ssn: candidateInformation.ssn,
-      email: candidateInformation.email
+      email: candidateInformation.email,
+      city: candidateInformation.city,
+      country: candidateInformation.country,
+      postalCode: candidateInformation.postalCode,
+      address: candidateInformation.address
     });
     const uri = "https://api.accuratebackground.com/v3/candidate/";
     const clientId = "b97083ec-d9c1-4d5f-b88c-06c43b4eed0f";
@@ -26,7 +30,6 @@ export const createCandidate = candidateInformation =>
     };
     fetch(uri, options)
       .then(res => res.json()) // expecting a json response
-      .then(json => console.log(JSON.stringify(json)))
       .then(json => resolve(json))
       .catch(error => reject(error));
   });
@@ -43,12 +46,15 @@ export const placeOrder = candidateInformation =>
       `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`
     );
     const param = new URLSearchParams();
-    param.append("candidateId", candidateInformation.Id);
+    param.append("candidateId", candidateInformation.id);
     param.append("packageType", "PKG_BASIC");
     param.append("workflow", "EXPRESS");
-    param.append("jobLocation.country", candidateInformation.country);
-    param.append("jobLocation.region", candidateInformation.region);
-    param.append("jobLocation.city", candidateInformation.city);
+    param.append(
+      "jobLocation.country",
+      candidateInformation.jobLocation.country
+    );
+    param.append("jobLocation.region", candidateInformation.jobLocation.region);
+    param.append("jobLocation.city", candidateInformation.jobLocation.city);
     const options = {
       method: "POST",
       headers,
@@ -56,7 +62,6 @@ export const placeOrder = candidateInformation =>
     };
     fetch(uri, options)
       .then(res => res.json())
-      .then(json => console.log(JSON.stringify(json)))
       .then(json => resolve(json))
       .catch(error => reject(error));
   });
