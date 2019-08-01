@@ -55,7 +55,7 @@ provider:
       Action:
         - dynamodb:Query
       Resource: 
-        - arn:aws:dynamodb:us-west-2:578713821554:table/ReportsTable/index/*
+        - arn:aws:dynamodb:us-west-2:578713821554:table/dev-stampsafe-reports/index/*
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
