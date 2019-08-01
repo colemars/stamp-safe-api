@@ -55,7 +55,18 @@ provider:
       Action:
         - dynamodb:Query
       Resource: 
-        - arn:aws:dynamodb:us-west-2:578713821554:table/dev-stampsafe-reports/index/*
+        Fn::Join:
+          - ''
+          -
+            - 'arn:aws:dynamodb:'
+            - Ref: AWS::Region
+            - ':'
+            - Ref: AWS::AccountId
+            - ':table/'
+            - "Fn::GetAtt": [ ReportsTable, Arn ]
+            - 'index/*'
+
+        # - arn:aws:dynamodb:us-west-2:AWS::AccountId:table/dev-stampsafe-reports/index/*
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
