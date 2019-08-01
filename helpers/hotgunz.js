@@ -6,7 +6,7 @@ const getStolenRecord = serialNumber =>
     console.log(serialNumber)
     const params = new URLSearchParams();
     console.log(params)
-    params.append("q", serialNumber);
+    params.append("q", "MFG124");
     const options = {
       method: "POST",
       body: params

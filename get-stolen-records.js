@@ -9,6 +9,7 @@ export default function main(event) {
       const dom = new JSDOM(body);
       const { document } = dom.window;
       const result = document.querySelector("#flash").textContent;
+      console.log(result);
       if (result.toLowerCase() === "warning: stolen firearm")
         return success("stolen");
       return success("not found");
