@@ -4,7 +4,7 @@ import { buyerReport } from "./constants/definitions";
 
 export default async function main(event) {
   const params = {
-    TableName: "stampsafe-reports",
+    TableName: process.env.tableName,
     IndexName: "typeId-accessToken-index",
     KeyConditionExpression: "typeId = :id and accessToken = :token",
     ExpressionAttributeValues: {
