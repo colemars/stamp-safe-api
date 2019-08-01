@@ -33,7 +33,8 @@ export default async function main(event) {
       const { reportStatus, linkKey } = results.Items[0];
       return { status: reportStatus, key: linkKey };
     } catch (e) {
-      return failure({ status: false });
+      console.log(e)
+      return failure({ e });
     }
   };
 
